@@ -4,32 +4,33 @@
 [![Rank](https://make.fun/badge/news-image-20261127/reyzn02/makefun-news-image-27nov/rank.svg)](https://make.fun/bounty/news-image-20261127)
 [![Reward](https://make.fun/badge/news-image-20261127/reyzn02/makefun-news-image-27nov/reward.svg)](https://make.fun/bounty/news-image-20261127)
 
-**Friday 27 November 2026 on one page: 34 dated stories, 10 regions,
+**Friday 27 November 2026 on one page: 35 dated stories, 8 sections,
 14 drawn scenes, every claim source-labelled.**
 
 One program draws a 1024×1024 newspaper front page summing up the world
 news of Friday 27 November 2026 — no network, no photos, no downloaded
 assets. Everything on the page is drawn in code: the masthead, three lead
-stories with illustrated panels, 31 more stories grouped by region, a
+stories with illustrated panels, 32 more stories grouped by region, a
 "By the numbers" strip, and a source line in the footer.
 
 ## The day on the page
 
 Lead stories: the Thanksgiving storm that left nearly 1m Americans without
-power; DR Congo's Ebola outbreak passing 12,000 cases (5,904 dead); Trump
-pressing Putin on Ukraine as Zelensky tells the BBC the US is "too focused
-on the Middle East".
+power; DR Congo's Ebola outbreak passing 12,000 cases (5,904 dead);
+Zelensky telling the BBC the US is "too focused on the Middle East".
 
-The grid covers 10 regions and beats — North America, Europe, the Middle
-East, Asia, Oceania, Africa, markets, tech, sport and health — from the
-AFP cyberattack and the Ibiza tanker spill to the New Zealand election
-result, the FCC clearing SpaceX's million-satellite network, and
+The grid covers 8 sections — North America, Europe, the Middle East,
+Asia, Oceania, markets, tech and sport — with Africa and health in the
+lead stories: from the AFP cyberattack and the Ibiza tanker to the New
+Zealand election result, Netweb's Skylus Workspaces launch, and
 Gukesh–Sindarov's third straight draw in Geneva.
 
-Every story was checked against a real report dated 27 November 2026
-(BBC, Reuters, AP, AFP/Al Jazeera, Anadolu, FT, WSJ, NDRRMC, FIDE, FIFA,
-NFL). Stories about events of 25–26 November that were first reported on
-the 27th carry their date on the page (e.g. "BBC · 26 NOV"). Nothing
+Every story was checked against a real report dated on or before
+27 November 2026 and carries its date on the page: "27 NOV" for
+stories reported on Friday 27 November 2026, an earlier tag for
+events of 24–26 November (e.g. "REUTERS · 26 NOV").
+Sources on the page: BBC, Reuters, AP, AFP, Al Jazeera, Consilium, SPA,
+FT, NDRRMC, FIDE, NFL, ANI, BBC Sport and Netweb. Nothing
 unverified is included: the Mayon volcano item, for example, reports the
 Alert Level 3 watch rather than an eruption, because no new eruption was
 reported that day.
@@ -60,9 +61,10 @@ Set `MAKEFUN_FORCE_RAW=1` to exercise the stdlib path locally.
 ```sh
 python3 main.py
 # wrote /output/entry.png
-# bytes: 219346
-# sha256: ee9b9cc40b87b74179ac8ff88a344dd7ffe0a768db23262867421e236d890412
+# bytes: 226210
+# sha256: cfa5dd21514b2eac18b07e046d727f529c76a3fb319c4ae00fe2ea2a25c45676
 # size: 1024x1024
+# column bottoms: [939, 921, 979] (limit 986)
 ```
 
 ## Determinism
@@ -70,8 +72,12 @@ python3 main.py
 The program is fully deterministic: fixed data, no clock, no randomness,
 no hash-order dependence. Two runs produce byte-identical PNGs on both
 backends (verified locally — same sha256 twice for the Pillow path and
-twice for the stdlib path). The image is 1024×1024 and under 1 MiB
-(~215 KB Pillow, ~165 KB stdlib).
+twice for the stdlib path; stdlib sha256
+74e129c35c1d22b36283c7cfcd18c466502e245a10b129b7e79854b43dfa6856).
+The image is 1024×1024 and under 1 MiB
+(~221 KB Pillow, ~164 KB stdlib). The layout is guarded by an assert in
+`build()`: if any column bottom ever exceeds the 986 px footer limit the
+program fails loudly instead of shipping a cut-off page.
 
 ## Competition
 
